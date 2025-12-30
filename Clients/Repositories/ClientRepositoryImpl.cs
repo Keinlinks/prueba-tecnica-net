@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Clients.Repositories
 {
-    internal class ClientRepository : IClientRepository
+    internal class ClientRepositoryImpl : IClientRepository
     {
         private readonly ClientDbContext _context;
         public async Task<List<Client>> GetWithEF(int page, int pageSize)
