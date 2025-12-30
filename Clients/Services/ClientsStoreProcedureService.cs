@@ -4,10 +4,10 @@ using Clients.Repositories;
 
 namespace Clients.Services
 {
-    public class ClientsEFService
+    public class ClientsStoreProcedureService
     {
         readonly IClientRepository ClientRepository;
-        public ClientsEFService(IClientRepository clientRepository)
+        public ClientsStoreProcedureService(IClientRepository clientRepository)
         {
             ClientRepository = clientRepository;
         }

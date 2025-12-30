@@ -1,3 +1,4 @@
+using Clients;
 
 namespace api
 {
@@ -13,6 +14,9 @@ namespace api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            //Clients services
+            builder.Services.AddClientsServices();
 
             var app = builder.Build();
 

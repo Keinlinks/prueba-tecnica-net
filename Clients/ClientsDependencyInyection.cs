@@ -7,7 +7,7 @@ namespace Clients
     {
         public static IServiceCollection AddClientsServices(this IServiceCollection services)
         {
-            services.AddScoped<ClientsEFService>();
+            services.AddScoped<ClientsStoreProcedureService>();
             services.AddScoped<ClientLinqService>();
 
             return services;
