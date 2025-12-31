@@ -1,4 +1,6 @@
 using Clients;
+using Clients.Db;
+using Microsoft.EntityFrameworkCore;
 
 namespace api
 {
@@ -18,7 +20,22 @@ namespace api
             //Clients services
             builder.Services.AddClientsServices();
 
+            builder.Services.AddDbContext<ClientDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            
+
             var app = builder.Build();
+
+            //Seed DB
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<ClientDbContext>();
+                context.Database.EnsureCreated();
+                DbclientSeeder.Seed(context);
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

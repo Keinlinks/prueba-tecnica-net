@@ -1,12 +1,13 @@
 ﻿
 namespace Clients.Dtos
 {
-    public class ClientDto
+    public record ClientDto
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public string Country { get; set; }
+        public string Id { get; init; }
+        public string Name { get; init; }
+        public string Phone { get; init; }
+        public string Country { get; init; }
+        public int CountryId { get; init; }
 
         public ClientDto() { }
 
