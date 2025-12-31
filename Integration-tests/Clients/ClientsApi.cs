@@ -9,7 +9,7 @@ namespace Integration_tests.Clients
         [SetUp]
         public void Setup()
         {
-            var appFactory = new WebApplicationFactory<Program>(); // <Program> apunta a tu API project
+            var appFactory = new WebApplicationFactory<Program>();
             _client = appFactory.CreateClient();
         }
 

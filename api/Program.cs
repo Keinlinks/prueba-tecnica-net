@@ -22,10 +22,23 @@ namespace api
 
             builder.Services.AddDbContext<ClientDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+                    sql => sql.MigrationsAssembly("Clients"));
+                
             });
 
-            
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularApp", policy =>
+                {
+                    policy
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
+
 
             var app = builder.Build();
 
@@ -33,7 +46,7 @@ namespace api
             using (var scope = app.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<ClientDbContext>();
-                context.Database.EnsureCreated();
+                context.Database.Migrate();
                 DbclientSeeder.Seed(context);
             }
 
@@ -45,6 +58,7 @@ namespace api
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowAngularApp");
 
             app.UseAuthorization();
 
